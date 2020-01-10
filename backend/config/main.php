@@ -12,6 +12,21 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'as beforeRequest' => [
+        'class' => yii\filters\AccessControl::class,
+        'except' => [
+            'gii/*',
+            'debug/*',
+            'site/login',
+            'site/error',
+        ],
+        'rules' => [
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -37,14 +52,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => require(__DIR__ . DIRECTORY_SEPARATOR . 'rules.php'),
         ],
-        */
     ],
     'params' => $params,
 ];

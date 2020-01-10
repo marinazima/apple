@@ -1,4 +1,5 @@
 <?php
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -44,6 +45,9 @@ return [
             ],
         ],
         */
+        'urlManager' => [
+            'rules' => require(__DIR__ . DIRECTORY_SEPARATOR . 'rules.php'),
+        ],
     ],
     'params' => $params,
 ];
