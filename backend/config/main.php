@@ -29,6 +29,11 @@ return [
             ],
         ],
     ],
+    'container' => [
+        'definitions' => [
+            \backend\interfaces\AppleServiceInterface::class => \backend\services\AppleService::class,
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',

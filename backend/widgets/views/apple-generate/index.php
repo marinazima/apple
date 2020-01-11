@@ -12,7 +12,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var $this View */
-/** @var $defaultCount int */
+/** @var $maxCount int */
+/** @var $enableManual int */
 
 AppleGenerateAsset::register($this);
 
@@ -21,8 +22,8 @@ AppleGenerateAsset::register($this);
 <?=
     Html::button(Yii::t('app', 'Generate apples'), [
         'class' => 'btn btn-success js-generate',
-        'data-toggle' => 'modal',
-        'data-target' => '#modalGenerate',
+        'data-max' => $maxCount,
+        'data-enable-manual' => $enableManual,
     ]);
 ?>
 
@@ -41,16 +42,17 @@ AppleGenerateAsset::register($this);
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?= Html::beginForm(['create'], 'POST', [
+                <?= Html::beginForm(['create'], 'GET', [
                     'id' => 'gen-form',
                 ]) ?>
                     <div class="modal-body">
                         <div class="form-group">
-                            <?= Html::textInput('count', $defaultCount, [
+                            <?= Html::textInput('count', null, [
                                 'type' => 'number',
                                 'min' => 1,
+                                'max' => $maxCount,
                                 'class' => 'form-control js-count',
-                                'data-default' => $defaultCount,
+
                             ]) ?>
                             <p class="help-block help-block-error"></p>
                         </div>

@@ -32,12 +32,15 @@ class Apple extends \yii\db\ActiveRecord
     const STATUS_ROTTEN = 2;
     const STATUS_EATEN = 3;
 
+    // in hours
+    const TIME_ROT = 5;
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'apple';
+        return '{{%apple}}';
     }
 
     /**
@@ -130,9 +133,18 @@ class Apple extends \yii\db\ActiveRecord
     /**
      * @return string|null
      */
-    public function getStatus(): ?string
+    public function getStatusAsString(): ?string
     {
         return ArrayHelper::getValue(self::getStatusList(), $this->status);
+    }
+
+    /**
+     * @return int
+     */
+    public function getBalance(): int
+    {
+        $balance = 100 - $this->eaten;
+        return $balance > 0 ? $balance : 0;
     }
 
     /**
@@ -148,5 +160,60 @@ class Apple extends \yii\db\ActiveRecord
         }
 
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRotten(): bool
+    {
+        if(
+            $this->status == self::STATUS_DOWN &&
+            $this->down_at
+        ){
+            $timeRot = time() - (self::TIME_ROT * 60 * 60);
+            // all apples down later than {{self::TIME_ROT}} hours ago - are rotten
+            if($this->down_at <= $timeRot) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isEaten(): bool
+    {
+        return $this->getBalance() == 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canDown(): bool
+    {
+        return $this->status == self::STATUS_NEW;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canRot(): bool
+    {
+        return (
+            $this->status == self::STATUS_DOWN && //down
+            !$this->isEaten() //not eaten
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function canEat(): bool
+    {
+        return (
+            $this->status == self::STATUS_DOWN && //down
+            !$this->isEaten() && //not eaten
+            !$this->isRotten() //not rotten
+        );
     }
 }

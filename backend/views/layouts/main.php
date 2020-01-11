@@ -41,7 +41,8 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => \Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => \Yii::t('app', 'Apples'), 'url' => ['/apple/index']];
+        $menuItems[] = ['label' => \Yii::t('app', 'Apple tree'), 'url' => ['/apple-tree/index']];
+        $menuItems[] = ['label' => \Yii::t('app', 'Apple stat'), 'url' => ['/apple/index']];
 
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

@@ -5,7 +5,6 @@ namespace common\models\search;
 use common\models\Apple;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use yii\db\Expression;
 
 /**
  * AppleSearch represents the model behind the search form about `common\models\search`.

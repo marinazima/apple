@@ -8,6 +8,7 @@
 
 use backend\components\grid\DatePickerColumn;
 use backend\widgets\AppleGenerateWidget;
+use backend\widgets\AppleStatWidget;
 use common\models\Apple;
 use common\models\User;
 use yii\helpers\Html;
@@ -18,7 +19,7 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel common\models\search\AppleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Apples');
+$this->title = Yii::t('app', 'Apple stat');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -27,13 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-header">
         <h4 class="card-title"><?= Html::encode($this->title) ?></h4>
     </div>
-
     <div class="card-header">
-        <p>
-            <?= AppleGenerateWidget::widget() ?>
-        </p>
+        <?= AppleStatWidget::widget() ?>
     </div>
-
     <div class="card-content">
         <?=
         GridView::widget([
@@ -47,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => [
                         'class' => 'grid-action-col'
                     ],
+                    'template' => '{view} {delete}'
                 ],
                 'id',
                 [
@@ -60,7 +58,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute'=>'status',
                     'filter' => Apple::getStatusList(),
                     'value' => function(Apple $model){
-                        return $model->getStatus();
+                        return $model->getStatusAsString();
+                    },
+                ],
+                [
+                    'attribute'=>'eaten',
+                    'value' => function(Apple $model){
+                        return $model->eaten . '%';
                     },
                 ],
                 [
