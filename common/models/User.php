@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use common\models\query\UserQuery;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -208,5 +209,28 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return UserQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserQuery(get_called_class());
+    }
+
+    /**
+     * @return array
+     */
+    public static function asDropDown()
+    {
+        return self::find()->select([
+            'username',
+            'id',
+        ])->active()
+            ->indexBy('id')
+            ->orderBy(['[[username]]' => SORT_ASC])
+            ->column();
     }
 }

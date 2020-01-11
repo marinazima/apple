@@ -8,6 +8,7 @@
 use yii\helpers\Html;
 
 $this->title = $name;
+
 ?>
 <div class="site-error">
 
@@ -18,10 +19,10 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        Возникла ошибка при обработке запроса.
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        Пожалуйста, свяжитесь с нами <a mailto="<?= \Yii::$app->params['adminEmail'] ?>"><?= \Yii::$app->params['adminEmail'] ?></a>
     </p>
 
 </div>

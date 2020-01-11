@@ -37,14 +37,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
         'urlManager' => [
             'rules' => require(__DIR__ . DIRECTORY_SEPARATOR . 'rules.php'),
         ],

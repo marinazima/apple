@@ -36,15 +36,17 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' =>  \Yii::t('yii', 'Home'), 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => \Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => \Yii::t('app', 'Apples'), 'url' => ['/apple/index']];
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                \Yii::t('app', 'Logout'). ' (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -73,6 +75,12 @@ AppAsset::register($this);
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
+
+<?php if ($this->blocks):
+    foreach ($this->blocks as $block):
+        print $block;
+    endforeach;
+endif; ?>
 
 <?php $this->endBody() ?>
 </body>

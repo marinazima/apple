@@ -31,5 +31,15 @@ return [
             ],
             'useFileTransport' => YII_DEBUG, // @runtime/mail/
         ],
+        'i18n' => [
+            'class' => \yii\i18n\I18N::class,
+            'translations' => [
+                'app' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@app/messages',
+                ],
+            ],
+        ],
     ],
 ];
