@@ -53,4 +53,13 @@ class AppleQuery extends \yii\db\ActiveQuery
     {
         return $this->orderBy([Apple::tableName() . '.[[created_at]]' => $sort]);
     }
+
+    /**
+     * @param int|array $id
+     * @return AppleQuery
+     */
+    public function byId($id): AppleQuery
+    {
+        return $this->andWhere([Apple::tableName() . '.[[id]]' => $id]);
+    }
 }

@@ -11,6 +11,8 @@ namespace backend\services;
 use backend\dto\AppleServiceDto;
 use backend\interfaces\AppleServiceInterface;
 use common\models\Apple;
+use yii\db\Expression;
+use yii\db\Query;
 
 class AppleService implements AppleServiceInterface
 {
@@ -44,7 +46,7 @@ class AppleService implements AppleServiceInterface
     public function rot(Apple $model): AppleServiceDto
     {
         if($model->canRot()) {
-            if($model->isRotten()) {
+            if($model->checkRotten()) {
                 $model->status = Apple::STATUS_ROTTEN;
                 $model->save(false);
                 return new AppleServiceDto([
@@ -69,7 +71,7 @@ class AppleService implements AppleServiceInterface
      */
     public function clear(Apple $model): AppleServiceDto
     {
-        if($model->isEaten()) {
+        if($model->checkEaten()) {
             $model->status = Apple::STATUS_EATEN;
             $model->save(false);
             return new AppleServiceDto([
@@ -109,6 +111,30 @@ class AppleService implements AppleServiceInterface
             'success' => false,
             'message' => ($message ?? null),
         ]);
+    }
+
+    /**
+     * @return int
+     */
+    public function massRot(): int
+    {
+        $ids = Apple::find()
+            ->select(['id'])
+            ->status(Apple::STATUS_DOWN)
+            ->andWhere(['>', new Expression('FLOOR((UNIX_TIMESTAMP() - down_at) / 3600)'), Apple::TIME_ROT])
+            ->column();
+
+        if(!empty($ids)) {
+            Apple::updateAll([
+                'status' => Apple::STATUS_ROTTEN
+            ], [
+                'id' => $ids
+            ]);
+
+            return count($ids);
+        }
+
+        return 0;
     }
 
     /**

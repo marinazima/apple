@@ -165,7 +165,7 @@ class Apple extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isRotten(): bool
+    public function checkRotten(): bool
     {
         if(
             $this->status == self::STATUS_DOWN &&
@@ -181,7 +181,7 @@ class Apple extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function isEaten(): bool
+    public function checkEaten(): bool
     {
         return $this->getBalance() == 0;
     }
@@ -201,7 +201,7 @@ class Apple extends \yii\db\ActiveRecord
     {
         return (
             $this->status == self::STATUS_DOWN && //down
-            !$this->isEaten() //not eaten
+            !$this->checkEaten() //not eaten
         );
     }
 
@@ -212,8 +212,8 @@ class Apple extends \yii\db\ActiveRecord
     {
         return (
             $this->status == self::STATUS_DOWN && //down
-            !$this->isEaten() && //not eaten
-            !$this->isRotten() //not rotten
+            !$this->checkEaten() && //not eaten
+            !$this->checkRotten() //not rotten
         );
     }
 }

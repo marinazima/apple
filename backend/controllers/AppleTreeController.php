@@ -34,7 +34,7 @@ class AppleTreeController extends Controller
     protected $appleService;
 
     /**
-     * ChatController constructor.
+     * AppleTreeController constructor.
      * @param string $id
      * @param \yii\base\Module $module
      * @param AppleServiceInterface $appleService
@@ -138,12 +138,12 @@ class AppleTreeController extends Controller
                     'success' => true,
                 ]);
             } else {
-                //check isEaten and clear if yes
+                //check if eatten and clear (set status eatten) if yes
                 $dto = $this->appleService->clear($model);
                 $eaten = $dto->isSuccess();
 
                 if(!$eaten) {
-                    //check isRotten and rot if yes
+                    //check if rotten and set status rotten if yes
                     $this->appleService->rot($model);
                     $inner = $this->renderAjax('_list-inner', ['model' => $model]);
                 }
@@ -172,7 +172,7 @@ class AppleTreeController extends Controller
         if($model) {
             $dto = $this->appleService->eat($model, $pie);
             if($dto->isSuccess()) {
-                if(!$model->isEaten()) {
+                if(!$model->checkEaten()) {
                     $inner = $this->renderAjax('_list-inner', ['model' => $model]);
                 }
                 return $this->asJson([

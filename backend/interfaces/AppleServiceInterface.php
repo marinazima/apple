@@ -29,5 +29,16 @@ interface AppleServiceInterface
      * @param Apple $model
      * @return AppleServiceDto
      */
+    public function eat(Apple $model, int $pie): AppleServiceDto;
+
+    /**
+     * @param Apple $model
+     * @return AppleServiceDto
+     */
     public function clear(Apple $model): AppleServiceDto;
+
+    /**
+     * @return int|null
+     */
+    public function massRot(): ?int;
 }
