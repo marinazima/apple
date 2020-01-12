@@ -60,9 +60,14 @@ php yii migrate/up
 
 Cron<br>
 Для проверки упавших яблок и перевода их в статус гнилых настроить крон
+
+```
+*/5 * * * * /path/to/php /path/to/yii apple-status/rotten
 ```
 
-*/5 * * * * /path/to/php /path/to/yii apple-status/rotten
+access to backend 
+```
+webmaster/webmaster
 ```
 
 
