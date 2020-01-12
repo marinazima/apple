@@ -60,7 +60,7 @@ class AppleSearch extends Apple
 
         $query
             ->andFilterWhere(['like', Apple::tableName() . '.[[created_at]]', $this->created_at])
-            ->andFilterWhere(['like', Apple::tableName() . '.[[date]]', $this->down_at]);
+            ->andFilterWhere(['like', Apple::tableName() . '.[[down_at]]', $this->down_at]);
 
         return $dataProvider;
     }
