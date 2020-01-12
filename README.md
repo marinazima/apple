@@ -43,8 +43,8 @@ environments/            contains environment-based overrides
 ```
 cp .env.dist .env
 ```
-Редактируем файл .env
-параметры подключения к DB
+Редактируем файл .env<br>
+параметры подключения к DB<br>
 параметры mailer'а
 
 Установка системы
@@ -58,9 +58,12 @@ composer install
 php yii migrate/up
 ```
 
-Cron
+Cron<br>
 Для проверки упавших яблок и перевода их в статус гнилых настроить крон
+```
+
 */5 * * * * /path/to/php /path/to/yii apple-status/rotten
+```
 
 
 
