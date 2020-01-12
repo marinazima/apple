@@ -5,6 +5,7 @@ namespace common\models\search;
 use common\models\Apple;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 
 /**
  * AppleSearch represents the model behind the search form about `common\models\search`.
@@ -59,8 +60,8 @@ class AppleSearch extends Apple
         ]);
 
         $query
-            ->andFilterWhere(['like', Apple::tableName() . '.[[created_at]]', $this->created_at])
-            ->andFilterWhere(['like', Apple::tableName() . '.[[down_at]]', $this->down_at]);
+            ->andFilterWhere(['like', new Expression('FROM_UNIXTIME(' . Apple::tableName() . '.[[created_at]])'), $this->created_at])
+            ->andFilterWhere(['like', new Expression('FROM_UNIXTIME(' . Apple::tableName() . '.[[down_at]])'), $this->down_at]);
 
         return $dataProvider;
     }
