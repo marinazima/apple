@@ -7,45 +7,77 @@ $this->title = 'Учёт яблок';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <h1>Тестовое задание</h1>
+        <p><a href="mailto:marina.n.panteleeva@gmail.com">marina.n.panteleeva@gmail.com</a></p>
     </div>
 
     <div class="body-content">
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <p>
+                    Установить advanced шаблон Yii2 фреймворка, в backend-приложении реализовать следующий закрытый
+                    функционал (доступ в backend-приложение должен производиться только по паролю, сложного разделения прав не требуется):
+                </p>
+
+                <p>
+                    Написать класс/объект Apple с хранением яблок в БД MySql следуя ООП парадигме.
+                </p>
+                <p>
+                    На странице в приложении должны быть отображены все яблоки, которые на этой же странице
+                    можно сгенерировать в случайном кол-ве соответствующей кнопкой.
+                </p>
+                <p>
+                    Рядом с каждым яблоком должны быть реализованы кнопки или формы соответствующие
+                    функциям (упасть, съесть  процент…) в задании.
+                </p>
+                <p>
+                    Задача не имеет каких-либо ограничений и требований. Все подходы к ее решению определяют способность
+                    выбора правильного алгоритма при проектировании системы и умение предусмотреть любые возможности развития алгоритма.
+                    Задание должно быть выложено в репозиторий на gitHub, с сохранением истории коммитов. Креативность только приветствуется.
+                </p>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-6">
+                <h2>Функции</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <ul>
+                    <li>упасть</li>
+                    <li>съесть ($percent - процент откушенной части)</li>
+                    <li>удалить (когда полностью съедено)</li>
+                </ul>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="col-lg-6">
+                <h2>Переменные</h2>
+                <ul>
+                    <li>цвет (устанавливается при создании объекта случайным)</li>
+                    <li>дата появления (устанавливается при создании объекта случайным unixTmeStamp)</li>
+                    <li>дата падения (устанавливается при падении объекта с дерева)</li>
+                    <li>статус (на дереве / упало)</li>
+                    <li>сколько съели (%)</li>
+                    <li>другие необходимые переменные, для определения состояния.</li>
+                </ul>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Состояния</h2>
+                <ul>
+                    <li>висит на дереве</li>
+                    <li>упало/лежит на земле</li>
+                    <li>гнилое яблоко</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h2>Условия</h2>
+                <ul>
+                    <li>Пока висит на дереве - испортиться не может.</li>
+                    <li>Когда висит на дереве - съесть не получится.</li>
+                    <li>После лежания 5 часов - портится.</li>
+                    <li>Когда испорчено - съесть не получится.</li>
+                    <li>Когда съедено - удаляется из массива яблок.</li>
+                </ul>
             </div>
         </div>
 
